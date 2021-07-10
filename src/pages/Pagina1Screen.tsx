@@ -2,20 +2,32 @@ import React, {useEffect} from 'react';
 import {DrawerScreenProps} from '@react-navigation/drawer';
 // import {StackScreenProps} from '@react-navigation/stack';
 import {View, Text, Button, TouchableOpacity} from 'react-native';
-import {styles} from '../theme/appTheme';
+import {colors, styles} from '../theme/appTheme';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 // interface Props extends StackScreenProps<any, any> {}
 interface Props extends DrawerScreenProps<any, any> {}
 
 const Pagina1Screen = ({navigation}: Props) => {
+  const {left} = useSafeAreaInsets();
+
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <Button
-          title="Menu"
-          onPress={() => {
-            navigation.toggleDrawer();
-          }}></Button>
+        // <Button
+        //   title="Menu"
+        //   onPress={() => {
+        //     navigation.toggleDrawer();
+        //   }}></Button>
+        <View style={{marginLeft: left + 15}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}>
+            <Icon name="menu" size={35} color={colors.primary} />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, []);
@@ -55,6 +67,8 @@ const Pagina1Screen = ({navigation}: Props) => {
               name: 'Maria',
             });
           }}>
+          <Icon name="person-outline" size={35} color={colors.primary} />
+
           <Text style={{...styles.botonGrandeTexto, color: 'black'}}>
             Maria
           </Text>
