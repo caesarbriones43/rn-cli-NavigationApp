@@ -1,7 +1,8 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {ScreenStackProps} from 'react-native-screens';
+import {AuthContext} from '../context/AuthContext';
 import {RouteStackParams} from '../navigator/StackNavigator';
 import {styles} from '../theme/appTheme';
 
@@ -11,10 +12,16 @@ const PersonaScreen = ({route, navigation}: Props) => {
   //   console.log(JSON.stringify(props, null, 3));
   const params = route.params;
 
+  const {changerUsername} = useContext(AuthContext);
+
   useEffect(() => {
     navigation.setOptions({
       title: params.name,
     });
+  }, []);
+
+  useEffect(() => {
+    changerUsername(params.name);
   }, []);
 
   return (
